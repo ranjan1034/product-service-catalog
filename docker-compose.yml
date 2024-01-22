@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "1900:1900"
+    depends_on:
+      - postgres
+      - mongo
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: users
+      POSTGRES_USER: user_service
+      POSTGRES_PASSWORD: secret
+
+  mongo:
+    image: mongo:latest
